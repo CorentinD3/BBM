@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="bg-gray-50 text-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-8 text-center">Mentions Légales</h1>
+            <p class="text-center mb-8">En vigueur au 01/03/2025</p>
+
+            <div class="space-y-8 leading-relaxed">
+                <!-- Éditeur du site -->
+                <section id="editeur">
+                    <h2 class="text-2xl font-semibold mb-4">1. Éditeur du site</h2>
+                    <p>Le site <strong>beauty-bym.fr</strong> est édité par :</p>
+                    <ul class="list-disc pl-6">
+                        <li><strong>Éditeur :</strong> D3Web</li>
+                        <li><strong>Statut juridique :</strong> Micro-entreprise</li>
+                        <li><strong>SIREN/SIRET :</strong> 923589279</li>
+                        <li><strong>Contact :</strong> 06.99.66.34.84</li>
+                    </ul>
+                    <p><strong>Directeur de la publication :</strong> M. BOGAERT</p>
+                </section>
+
+                <!-- Hébergeur du site -->
+                <section id="hebergeur">
+                    <h2 class="text-2xl font-semibold mb-4">2. Hébergeur du site</h2>
+                    <p>Le site <strong>beauty-bym.fr</strong> est hébergé par :</p>
+                    <ul class="list-disc pl-6">
+                        <li><strong>Responsable de la publication :</strong>D3Web</li>
+                        <li><strong>Hébergeur :</strong> OVHcloud</li>
+                        <li><strong>Adresse :</strong> 2 rue Kellermann, 59100 Roubaix, France</li>
+                        <li><strong>Contact :</strong> <a href="https://www.ovhcloud.com" target="_blank" class="text-blue-500 underline">https://www.ovhcloud.com</a></li>
+                    </ul>
+                </section>
+
+                <!-- Activité du site -->
+                <section id="activite">
+                    <h2 class="text-2xl font-semibold mb-4">3. Activité du site</h2>
+                    <p>Le site <strong>beauty-bym.fr</strong> propose les services suivants :</p>
+                    <ul class="list-disc pl-6">
+                        <li>Prise de rendez-vous en ligne : Les clients peuvent réserver un créneau via une application web.</li>
+                        <li>Rappels automatiques : Envoi de SMS ou emails aux clients pour réduire les absences.</li>
+                    </ul>
+                </section>
+
+                <!-- Collecte et traitement des données personnelles -->
+                <section id="donnees-personnelles">
+                    <h2 class="text-2xl font-semibold mb-4">4. Collecte et traitement des données personnelles</h2>
+                    <p>Conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés, ainsi qu'au Règlement Général sur la Protection des Données (RGPD), le site <strong>beauty-bym.fr</strong> collecte et traite des données personnelles dans le respect de la vie privée des utilisateurs.</p>
+                    <p>Les données personnelles collectées sont utilisées pour les finalités suivantes :</p>
+                    <ul class="list-disc pl-6">
+                        <li>Gestion des rendez-vous et des rappels automatiques ;</li>
+                        <li>Amélioration des services proposés ;</li>
+                        <li>Communication avec l'Utilisateur.</li>
+                    </ul>
+                    <p>L'Utilisateur dispose d'un droit d'accès, de rectification, de suppression, de limitation et d'opposition de ses données personnelles. Pour exercer ces droits, l'Utilisateur peut contacter l'éditeur.</p>
+                    <p>Les données personnelles sont conservées pendant une durée maximale de 24 mois après la dernière utilisation du site, sauf obligation légale ou réglementaire nécessitant une conservation plus longue.</p>
+                </section>
+
+                <!-- Propriété intellectuelle -->
+                <section id="propriete-intellectuelle">
+                    <h2 class="text-2xl font-semibold mb-4">5. Propriété intellectuelle</h2>
+                    <p>Tous les éléments du site <strong>beauty-bym.fr</strong> (textes, images, logos, vidéos, etc.) sont protégés par les dispositions du Code de la propriété intellectuelle. Toute reproduction, représentation, modification ou exploitation de ces éléments, sans l'autorisation préalable et écrite de l'éditeur, est strictement interdite.</p>
+                </section>
+
+                <!-- Cookies -->
+                <section id="cookies">
+                    <h2 class="text-2xl font-semibold mb-4">6. Cookies</h2>
+                    <p>Le site <strong>beauty-bym.fr</strong> utilise des cookies techniques pour améliorer l'expérience de l'Utilisateur. Ces cookies sont strictement nécessaires au fonctionnement du site et ne collectent aucune donnée personnelle. Ils ne peuvent pas être utilisés pour identifier quelqu'un.</p>
+                    <p>L'Utilisateur peut désactiver les cookies en paramétrant son navigateur, mais cela peut limiter certaines fonctionnalités du site.</p>
+                </section>
+
+                <!-- Limitation de responsabilité -->
+                <section id="responsabilite">
+                    <h2 class="text-2xl font-semibold mb-4">7. Limitation de responsabilité</h2>
+                    <p>Le site <strong>beauty-bym.fr</strong> ne peut être tenu responsable des dommages directs ou indirects causés à l'équipement de l'Utilisateur lors de l'accès au site. De même, la responsabilité du site ne peut être engagée en cas de force majeure ou du fait imprévisible et insurmontable d'un tiers.</p>
+                </section>
+
+                <!-- Droit applicable et juridiction compétente -->
+                <section id="droit-applicable">
+                    <h2 class="text-2xl font-semibold mb-4">8. Droit applicable et juridiction compétente</h2>
+                    <p>Les présentes mentions légales sont régies par le droit français. En cas de litige, les tribunaux français seront seuls compétents.</p>
+                </section>
+
+                <!-- Contact -->
+                <section id="contact">
+                    <h2 class="text-2xl font-semibold mb-4">9. Contact</h2>
+                    <p>Pour toute question relative aux présentes mentions légales ou à l'utilisation du site, vous pouvez contacter l'éditeur aux coordonnées suivantes :</p>
+                    <ul class="list-disc pl-6">
+                        <li><strong>Adresse e-mail :</strong> bogaert.corentin@hotmail.fr</li>
+                        <li><strong>Numéro de téléphone :</strong> 06.99.66.34.84</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

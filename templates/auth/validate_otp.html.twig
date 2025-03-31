@@ -1,0 +1,136 @@
+{# templates/auth/validate_otp.html.twig #}
+{% extends 'base.html.twig' %}
+{% block meta_title %}
+Validation
+{% endblock %}
+{% block body %}
+    <div class=" min-h-[calc(70vh-64px)] mx-auto flex items-center justify-center ">
+        <div class="relative flex flex-col w-fit max-w-[99vw]  shadow-2xl rounded-lg px-6 py-14 lg:border-2 border-0 border-orange-950">
+            <!-- Gradient Background -->
+            <div class="absolute inset-0 bg-gradient-to-r from-red-50 to-orange-950 opacity-20 z-0">
+                <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+                    <path fill="white" fill-opacity="0.3" d="M0,128L48,160C96,192,192,256,288,266.7C384,277,480,235,576,192C672,149,768,107,864,112C960,117,1056,171,1152,192C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+
+            <!-- Titre -->
+            <h1 class="relative text-4xl mx-auto font-bold tracking-wide">
+                Connexion</h1>
+
+            <!-- SVG -->
+            <svg class="relative w-[96px] mx-auto py-12" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="512" cy="512" r="512" style="fill:black"/>
+                <path d="m458.15 617.7 18.8-107.3a56.94 56.94 0 0 1 35.2-101.9V289.4h-145.2a56.33 56.33 0 0 0-56.3 56.3v275.8a33.94 33.94 0 0 0 3.4 15c12.2 24.6 60.2 103.7 197.9 164.5V622.1a313.29 313.29 0 0 1-53.8-4.4zM656.85 289h-144.9v119.1a56.86 56.86 0 0 1 35.7 101.4l18.8 107.8A320.58 320.58 0 0 1 512 622v178.6c137.5-60.5 185.7-139.9 197.9-164.5a33.94 33.94 0 0 0 3.4-15V345.5a56 56 0 0 0-16.4-40 56.76 56.76 0 0 0-40.05-16.5z" style="fill:#fef2f2"/>
+            </svg>
+
+            <!-- Messages Flash -->
+            {% for label, messages in app.flashes %}
+                <div class="text-sm text-cente w-96r py-2 px-4 mb-4 rounded-md bg-red-100 text-red-600">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <!-- Formulaire -->
+            <form method="post" action="{{ path('app_validate-otp') }}" class="space-y-4">
+                <div class="relative w-96 text-sm font-medium text-gray-600 text-center mb-6">
+                    Entrez le code OTP reçu par SMS pour valider votre identité.
+                </div>
+                <div class="relative flex items-center w-full h-fit my-auto justify-center border-black border-t border-b py-6 mb-[12vw] space-x-2">
+                    <!-- Champs OTP -->
+                    <div class="flex space-x-1">
+                        {% for i in 1..6 %}
+                            <input
+                                    type="tel"
+                                    id="otp_{{ i }}"
+                                    name="otp_{{ i }}"
+                                    data-maxlength="1"
+                                    class='w-5 h-6 text-center font-semibold border rounded-md border-black focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-[#94c39e] sm:w-6 sm:h-7 shadow',
+                                    autocomplete="one-time-code"
+                                    required
+                            >
+                        {% endfor %}
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('otp_auth') }}">
+
+                <!-- Bouton de soumission -->
+                <button
+                        type="submit"
+                        class="relative w-full flex items-center justify-center shadow-xl text-white font-medium py-2 rounded-md bg-[#5d7f64] transition px-3 border-2 border-transparent hover:bg-[#4a6350] gap-2 mx-auto">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Valider
+                </button>
+
+            </form>
+        </div>
+    </div>
+    <style>
+        body {
+            background-color: #fef2f2 !important;
+            min-height: 100vh; /* S'assurer que le body occupe tout l'écran */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Récupération des champs OTP avec des IDs commençant par "otp_"
+            const otpInputs = Array.from(document.querySelectorAll('input[id^="otp_"]'));
+
+            // Met le focus sur le premier champ au chargement
+            if (otpInputs.length > 0) {
+                otpInputs[0].focus();
+            }
+
+            // Gestion de l'input et de la navigation entre les champs
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', () => {
+                    const maxLength = input.getAttribute('data-maxlength'); // Récupère la longueur max
+                    if (input.value.length > maxLength) {
+                        const otpValue = input.value; // Capture la valeur complète
+                        otpInputs.forEach((otpInput, otpIndex) => {
+                            otpInput.value = otpValue[otpIndex] || ''; // Remplit chaque champ
+                        });
+
+                        // Focus sur le dernier champ rempli
+                        const lastIndex = Math.min(otpValue.length, otpInputs.length) - 1;
+                        if (lastIndex >= 0) {
+                            otpInputs[lastIndex].focus();
+                        }
+                    } else {
+                        input.value = input.value.slice(0, maxLength); // Limite la saisie à la longueur max
+                        if (input.value && index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus(); // Passe au champ suivant
+                        }
+                    }
+                });
+
+                input.addEventListener('keydown', (event) => {
+                    if (event.key === 'Backspace' && !input.value && index > 0) {
+                        otpInputs[index - 1].focus(); // Retourne au champ précédent
+                    }
+                });
+            });
+
+            // Gestion du collage (CTRL+V) ou autocomplétion dans le premier champ
+            otpInputs[0].addEventListener('paste', (event) => {
+                const pasteData = event.clipboardData.getData('text'); // Récupère les données collées
+                const digits = pasteData.replace(/\D/g, '').slice(0, otpInputs.length); // Garde uniquement les chiffres et limite à la longueur
+
+                otpInputs.forEach((input, index) => {
+                    input.value = digits[index] || ''; // Remplit les champs
+                });
+
+                // Focus sur le dernier champ rempli
+                const lastIndex = Math.min(digits.length, otpInputs.length) - 1;
+                if (lastIndex >= 0) {
+                    otpInputs[lastIndex].focus();
+                }
+
+                event.preventDefault(); // Empêche le comportement par défaut du collage
+            });
+        });
+    </script>
+
+{% endblock %}

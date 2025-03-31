@@ -1,0 +1,192 @@
+<div class="fixed hidden modale inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 flex-col">
+    <!-- Modale d'annulation -->
+
+    <div class="lg:max-w-4xl lg:max-w-[25vw] max-w-[90vw] mx-auto pt-6 lg:px-8 px-[10vw] mx-[10vw] bg-white shadow-2xl rounded-lg lg:mb-6 pb-6 border-2 border-black">
+        <!-- Titre de la page -->
+        <div class="flex lg:items-center items-start justify-between lg:flex-row flex-col border-b border-black pb-4 mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Annulation</h1>
+        </div>
+
+        {# ==============================================
+           1) Calculer le nombre d'heures avant le RDV
+           ============================================== #}
+        {% set dateObj = (app.user and app.user.hour) ? app.user.hour.date.getDate()|date('Y-m-d') : null %}
+        {% set hourObj = (app.user and app.user.hour) ? app.user.hour.hour|date('H:i') : null %}
+
+        {% if dateObj and hourObj %}
+            {# Convertir la date + heure en timestamp #}
+            {% set appointmentTimestamp = (dateObj ~ ' ' ~ hourObj)|date('U') %}
+            {# Timestamp actuel #}
+            {% set nowTimestamp = 'now'|date('U') %}
+            {# Différence en heures #}
+            {% set diffInHours = (appointmentTimestamp - nowTimestamp) / 3600 %}
+
+            {# ==============================================
+               2) Vérifier si c'est < 48 heures
+               ============================================== #}
+            {% if diffInHours < 48 %}
+                <!-- Moins de 48h : annulation impossible -->
+                <div>
+                    <!-- Message explicatif -->
+                    <p class="text-gray-600 mb-6">
+                        Vous ne pouvez plus annuler votre réservation à moins de 48 heures.<br>
+                        Veuillez nous contacter directement pour toute assistance.
+                    </p>
+                    <!-- Section de confirmation de réservation -->
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-6 border-b border-black pb-6 mb-6">
+
+                        <!-- Détails de la réservation (date, heure, durée) -->
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-700 mb-2">Détails de la réservation</h2>
+                            <!-- Prestation -->
+                            <div class="flex items-center mb-4">
+                                <span class="inline-block w-10 h-10 bg-[#dbeafe] text-[#1e3a8a] rounded-full mr-4 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <p class="text-gray-500">Prestation :</p>
+                                    {% if app.user %}
+                                        {% if app.user.hour is not null and app.user.hour.variant is not empty %}
+                                            <p class="font-medium text-gray-900">{{ app.user.hour.prestation.label }}</p>
+                                            <p class="font-medium text-gray-900">{{ app.user.hour.variant.label }}</p>
+                                        {% elseif app.user.hour is not null %}
+                                            <p class="font-medium text-gray-900">{{ app.user.hour.prestation.label }}</p>
+                                        {% else %}
+                                            <p>Veuillez vous connecter pour voir vos informations de réservation.</p>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Date et Heure -->
+                            <div class="flex items-center mb-4">
+                                <span class="inline-block w-10 h-10 bg-[#e0f3e0] text-[#5d7f64] rounded-full mr-4 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <p class="text-gray-500">Date :</p>
+                                    {% if app.user and app.user.hour %}
+                                        <p class="font-medium text-gray-900">
+                                            Le {{ app.user.hour.date }} à {{ app.user.hour.hour|date('H:i') }}
+                                        </p>
+                                    {% else %}
+                                        <p>Veuillez vous connecter pour voir vos informations de réservation.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bouton de retour -->
+                    <div class="flex lg:justify-center justify-center">
+                        <button id="back-button" onclick="closeModal();"
+                                class="flex items-center justify-center shadow text-neutral-600 font-medium py-2 rounded-md bg-white 
+                                       transition px-3 border-2 border-transparent hover:border-black gap-2">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.707 4.293a1 1 0 010 1.414L5.414 8H17a1 1 0 010 2H5.414l2.293 2.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Retour
+                        </button>
+                    </div>
+                </div>
+            {% else %}
+                {# ==============================================
+                   Rendez-vous à plus de 48h => annulation possible
+                   ============================================== #}
+                <div>
+                    <!-- Message explicatif -->
+                    <p class="text-gray-600 mb-6">
+                        Vous êtes sur le point d'annuler votre réservation. Cette action est irréversible et le créneau réservé sera de nouveau disponible.
+                    </p>
+                    <!-- Section de confirmation de réservation -->
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-6 border-b border-black pb-6 mb-6">
+
+                        <!-- Détails de la réservation (date, heure, durée) -->
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-700 mb-2">Détails de la réservation</h2>
+                            <!-- Prestation -->
+                            <div class="flex items-center mb-4">
+                                <span class="inline-block w-10 h-10 bg-[#dbeafe] text-[#1e3a8a] rounded-full mr-4 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <p class="text-gray-500">Prestation :</p>
+                                    {% if app.user %}
+                                        {% if app.user.hour is not null and app.user.hour.variant is not empty %}
+                                            <p class="font-medium text-gray-900">{{ app.user.hour.prestation.label }}</p>
+                                            <p class="font-medium text-gray-900">{{ app.user.hour.variant.label }}</p>
+                                        {% elseif app.user.hour is not null %}
+                                            <p class="font-medium text-gray-900">{{ app.user.hour.prestation.label }}</p>
+                                        {% else %}
+                                            <p>Veuillez vous connecter pour voir vos informations de réservation.</p>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Date et Heure -->
+                            <div class="flex items-center mb-4">
+                                <span class="inline-block w-10 h-10 bg-[#e0f3e0] text-[#5d7f64] rounded-full mr-4 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <p class="text-gray-500">Date :</p>
+                                    {% if app.user and app.user.hour %}
+                                        <p class="font-medium text-gray-900">
+                                            Le {{ app.user.hour.date }} à {{ app.user.hour.hour|date('H:i') }}
+                                        </p>
+                                    {% else %}
+                                        <p>Veuillez vous connecter pour voir vos informations de réservation.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Boutons d'action -->
+                    <div class="flex lg:justify-center justify-center lg:flex-row flex-col lg:space-x-4 space-x-0 lg:space-y-0 space-y-3">
+                        <button id="keep-button" onclick="closeModal();"
+                                class="flex items-center justify-center shadow text-neutral-600 font-medium py-2 rounded-md bg-white 
+                                       transition px-3 border-2 border-transparent hover:border-black gap-2 sm:mt-0 mt-2">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.707 4.293a1 1 0 010 1.414L5.414 8H17a1 1 0 010 2H5.414l2.293 2.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Conserver la réservation
+                        </button>
+
+                        <a href="{{ path('app_cancel-appointment') }}"
+                           class="flex items-center justify-center shadow text-[#8a4b4b] font-medium py-2 rounded-md bg-[#f8d7da]
+                                  transition px-3 border-2 border-transparent hover:border-black border2 gap-2 sm:mt-0 mt-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            Annuler la réservation
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            <!-- Pas d'infos de réservation -->
+            <p class="text-gray-600 mb-6">
+                Aucune information de rendez-vous disponible.
+            </p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // Fonction pour fermer la modale
+    function closeModal() {
+        document.querySelector('.modale').classList.add('hidden');
+    }
+    // Fonction pour ouvrir la modale
+    function openModal() {
+        document.querySelector('.modale').classList.remove('hidden');
+    }
+</script>

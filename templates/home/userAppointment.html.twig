@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block meta_title %}
+    Historique des Rendez-vous
+{% endblock %}
+
+{% block body %}
+    {% include 'components/cancelModal.html.twig' %}
+    <div class="relative lg:hidden h-[calc(70vh-64px)] w-full z-0">
+        <img src="{{ asset('img/out.jpg') }}" alt="Description de l'image"
+             class="h-[70vh] w-screen object-cover object-[50%]-[40%] lg:object-[10%_70%] fixed top-0 left-0 z-0">
+    </div>
+
+    <section class=" w-full bg-red-50 relative border-y-[1.5px] border-black z-20">
+
+        <div class="flex flex-col items-center min-h-[30vh] justify-center">
+            <svg class="w-100 h-12">
+                <defs>
+                    <!-- Chemin avec une hauteur ajustée -->
+                    <path id="curve" d="M 20, 60 A 150, 50 0 0, 1 280, 60" />
+                </defs>
+                <text width="500">
+                    <!-- Décalage vertical avec dy -->
+                    <textPath
+                            href="#curve"
+                            startOffset="50%"
+                            text-anchor="middle"
+                            fill="#431407"
+                            class="text-lg italic font-lato"
+                            dy="0.25em"
+                    >
+                        Extension de cils
+                    </textPath>
+                </text>
+            </svg>
+
+            <h1 class="text-4xl font-regitha tracking-wide text-orange-950 mb-6 mt-3">
+                Votre historique
+            </h1>
+            <h2 class="text-lg font-lato tracking-wide text-orange-950 italic">
+                Beauty by M.
+            </h2>
+        </div>
+    </section>
+    <div class="relative lg:max-w-4xl w-full mx-auto lg:px-8 px-[10vw] bg-white shadow-2xl lg:rounded-lg lg:mb-6 pb-6 pt-6">
+
+
+        {# Section Rendez-vous Actif #}
+        {% if userAppointment %}
+            <section class="mb-12">
+                <div class="border-b border-black pb-4 mb-6">
+                    <h2 class="text-xl font-bold mb-3">Rendez-vous à venir</h2>
+                </div>
+                <div class="relative bg-blue-50 border-l-4 border-[#1e3a8a] rounded-lg shadow-2xl p-6 ring-[1px] ring-black">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-amber-950 opacity-20 z-0">
+                        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"
+                             preserveAspectRatio="xMidYMax slice">
+                            <path fill="white" fill-opacity="0.3"
+                                  d="M0,128L48,160C96,192,192,256,288,266.7C384,277,480,235,576,192C672,149,768,107,864,112C960,117,1056,171,1152,192C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                        </svg>
+                    </div>
+                    <div class="relative flex items-center space-x-4">
+                    <span class="inline-block w-12 h-12 bg-[#f3f9ff] text-[#1e3a8a] rounded-full border-2 border-[#1e3a8a] flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                             stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                        </svg>
+                    </span>
+                        <div>
+                            {% if userAppointment.variant is not empty and userAppointment.variant is defined %}
+                                <h3 class="text-lg font-semibold">{{ userAppointment.prestation.label }}</h3>
+                                <p class="font-medium text-gray-900 mb-1">{{ userAppointment.variant.label }}</p>
+                            {% else %}
+                                <h3 class="text-lg font-semibold">{{ userAppointment.prestation.label }}</h3>
+                            {% endif %}
+
+                            <p class="text-sm text-gray-500">Le {{ userAppointment.date }}
+                                à {{ userAppointment.hour|date('H:i') }}</p>
+                        </div>
+                    </div>
+                    <div class="relative flex flex-wrap text-gray-600 text-sm mt-4 pb-2 border-b pt-2">
+                        {% if userAppointment.variant is not empty and userAppointment.variant is defined %}
+                            <p class="mr-4">Durée : <span
+                                        class="font-medium">{{ userAppointment.variant.durationInMinutes }} minutes</span>
+                            </p>
+                            <p>Prix : <span class="font-medium">{{ userAppointment.variant.price }}€</span></p>
+                        {% else %}
+                            <p class="mr-4">Durée : <span
+                                        class="font-medium">{{ userAppointment.prestation.durationInMinutes }} minutes</span>
+                            </p>
+                            <p>Prix : <span class="font-medium">{{ userAppointment.prestation.price }}€</span></p>
+                        {% endif %}
+
+                    </div>
+                    <button onclick="openModal()"
+                            class="relative mt-4 w-full flex items-center justify-center shadow-2xl text-[#1e3a8a] font-medium py-2 rounded-md bg-white transition px-3 border-[1.5px] border-[#1e3a8a] hover:bg-[#dbeafe] gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        Annuler la réservation
+                    </button>
+                </div>
+            </section>
+        {% else %}
+
+            <div class="flex relative flex-col items-center justify-center my-14 text-center text-gray-700">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#fef2f2" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-[96px] h-[96px] rounded-full text-[#431407] bg-[#fbeae6] p-3 border-2 border-black my-12">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"/>
+                </svg>
+
+                <h2 class="text-xl font-semibold mb-6">Vous n'avez aucun rendez-vous pour le moment.</h2>
+                <p class="w-96 mt-2">Planifiez votre prochain rendez-vous pour voir les informations ici.</p>
+
+                <a href="{{ path('app_cal') }}">
+                    <button class="relative w-full flex items-center justify-center shadow-2xl text-white font-medium py-2 rounded-md bg-[#5d7f64] transition px-3 border-2 border-transparent hover:bg-[#4a6350] gap-2 mx-auto mt-6">
+                        Réservez un rendez-vous
+                        <svg class="w-5 h-5 rotate-180" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.707 4.293a1 1 0 010 1.414L5.414 8H17a1 1 0 010 2H5.414l2.293 2.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+
+  
+    </div>
+    <script>
+        function toggleDetails(element) {
+            const details = element.querySelector('.appointment-details');
+            const arrowIcon = element.querySelector('.arrow-icon');
+            const svg = element.querySelector('.svgOld');
+
+            // Animation SVG
+            svg.classList.toggle('h-[160%]');
+            svg.classList.toggle('h-[100%]');
+
+            // Synchroniser la boîte avec l'animation SVG
+            const animationDuration = 0; // Durée en ms (correspond à la durée de transition du SVG)
+
+            setTimeout(() => {
+                // Animation de la boîte après l'animation SVG
+                details.classList.toggle('max-h-0');
+                details.classList.toggle('max-h-40');
+            }, animationDuration);
+
+            // Rotation de l'icône de flèche
+            arrowIcon.classList.toggle('rotate-180');
+        }
+    </script>
+    <style>
+        body {
+            background-color: white !important;
+        }
+
+        .svgOld {
+            transition: height 0.25s linear; /* Transition fluide pour le SVG */
+        }
+
+
+        .arrow-icon {
+            transition: transform 0.25s ease-in-out; /* Transition fluide pour la rotation */
+        }
+
+    </style>
+{% endblock %}

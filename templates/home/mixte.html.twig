@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block meta_title %}
+    Volume Mixte
+{% endblock %}
+
+{% block body %}
+    <div class="relative lg:hidden h-[calc(70vh-64px)] w-full z-0">
+        <img src="{{ asset('img/out.jpg') }}" alt="Description de l'image"
+             class="h-[70vh] w-screen object-cover object-[50%]-[40%] lg:object-[10%_70%] fixed top-0 left-0 z-0">
+    </div>
+
+
+    <section class=" w-full bg-red-50 relative border-y-[1.5px] border-black z-20">
+
+        <div class="flex flex-col items-center min-h-[30vh] justify-center">
+            <svg class="w-100 h-12">
+                <defs>
+                    <!-- Chemin avec une hauteur ajustée -->
+                    <path id="curve" d="M 20, 60 A 150, 50 0 0, 1 280, 60" />
+                </defs>
+                <text width="500">
+                    <!-- Décalage vertical avec dy -->
+                    <textPath
+                            href="#curve"
+                            startOffset="50%"
+                            text-anchor="middle"
+                            fill="#431407"
+                            class="text-lg italic"
+                            dy="0.25em"
+                    >
+                        Extension de cils
+                    </textPath>
+                </text>
+            </svg>
+
+            <h1 class="text-4xl font-regitha tracking-wide text-orange-950 mb-6 mt-3">
+                Mixte
+            </h1>
+            <h2 class="text-lg tracking-wide text-orange-950 italic">
+                Beauty by M.
+            </h2>
+        </div>
+
+    </section>
+
+    <!-- Section avec le carrousel -->
+    <section class=" relative z-20 border-b-[1.5px] bg-[#fbeae6] border-black text-orange-950 pb-16 lg:pt-14 pt-20">
+        <div class="container mx-auto flex  lg:flex-row flex-col-reverse">
+            <div class="flex lg:flex-row flex-col-reverse justify-center items-center px-6 lg:gap-6">
+                <div
+                        class="mx-auto lg:w-1/2 w-full lg:mt-6 mt-14"
+                        id="appSliderHybride">
+                </div>
+                <div class="flex flex-col lg:w-1/2 w-full justify-center items-center mx-auto">
+                    <h2 class="tracking-widest w-full py-2 leading-none text-3xl text-center bg-[#fbeae6] font-bold font-regitha italic z-30">
+                        Mixte
+                    </h2>
+                    <span class="text-8xl tracking-widest font-regitha leading-none -mt-[75px] z-20">
+                            03
+                        </span>
+                    <h3 class="text-center w-full text-lg my-14 mx-6 font-lato leading-relaxed">
+                        La pose mixte aussi appelée hybride, est une pose faite de petits bouquets de cils. Cette technique vous apportera un effet plus courbé, long et moyennement volumineux. Le résultat sera plus ou moins long selon ce que vous souhaitez. Il sera également plus ou moins fourni selon votre base
+                    </h3>
+                        <div class="flex flex-col items-center gap-y-3 w-full ">
+                            <p class="text-orange-950 text-lg">
+                                Durée de la pose : <span class="font-bold">1 heure</span>.
+                            </p>
+                            <p class="text-orange-950 text-lg mb-6">
+                                Prix de la prestation : <span class="font-bold">60€</span>.
+                            </p>
+                        <!-- Bouton Réservez votre rendez-vous -->
+                        <a href="{{ path('app_cal') }}">
+                            <button type="button" class="relative w-full flex items-center justify-center shadow-2xl text-white font-medium py-2 rounded-md bg-[#5d7f64] transition px-6 hover:bg-[#4a6350] gap-2 mx-auto mt-6 border-2 border-black shadow-[0px_3px_10px_rgba(0,0,0,0.5)]">
+                                <span class="mr-2">Réservez votre rendez-vous</span>
+                                <svg class="w-6 h-6 rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M7.707 4.293a1 1 0 010 1.414L5.414 8H17a1 1 0 010 2H5.414l2.293 2.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section des tarifs -->
+    <section class="bg-red-50 relative py-16  mx-auto border-b-[1.5px] border-black">
+        <div class="container px-6 mx-auto">
+            <div class="relative py-12 bg-[#fbeae6] mx-auto px-6 rounded-lg shadow-md border-2 border-black">
+
+                <h2 class="relative flex lg:flex-row flex-col text-4xl font-regitha tracking-wide text-orange-950 mb-12 w-fit mx-auto lg:gap-4 gap-2">
+
+                    <p class="mx-auto">Informations</p>
+                    <p class="mx-auto">mixte</p>
+                </h2>
+
+                <div class="relative space-y-4 text-lg lg:px-6">
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left font-lato leading-relaxed">Pose complète</p>
+                        <p class="text-center text-gray-950 font-lato leading-relaxed">1 heure</p>
+                        <p class="text-right text-black  leading-relaxed"><span class="font-bold">60.00€</span></p>
+                    </div>
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left font-lato leading-relaxed">&bull; Remplissage 2 semaines</p>
+                        <p class="text-center text-gray-950 font-lato leading-relaxed">45 minutes</p>
+                        <p class="text-right text-black  leading-relaxed"><span class="font-bold">30.00€</span></p>
+                    </div>
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left font-lato leading-relaxed">&bull; Remplissage 3 semaines</p>
+                        <p class="text-center text-gray-950 font-lato leading-relaxed">45 minutes</p>
+                        <p class="text-right text-black  leading-relaxed"><span class="font-bold">35.00€</span></p>
+                    </div>
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left font-lato leading-relaxed">&bull; Remplissage 4 semaines</p>
+                        <p class="text-center text-gray-950 font-lato leading-relaxed">45 minutes</p>
+                        <p class="text-right text-black  leading-relaxed"><span class="font-bold">40.00€</span></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Call to Action -->
+    <section class="relative w-full bg-[#fbeae6]">
+        <div class="flex bg-[#fbeae6] container px-6 flex-col justify-center items-center text-center mx-auto py-12">
+            <h2 class="text-4xl font-regitha tracking-wide text-orange-950 mb-6">
+                N'attendez plus !
+            </h2>
+            <h3 class="text-lg tracking-wide text-orange-950 mb-6 leading-relaxed ">
+                Prenez rendez-vous dès maintenant et laissez-nous sublimer votre regard. Notre équipe est là pour vous offrir une expérience unique et inoubliable.
+            </h3>
+            <a href="{{ path('app_cal') }}">
+                <button type="button" class="relative w-full flex items-center justify-center text-white font-medium py-2 rounded-md bg-[#5d7f64] transition px-6 hover:bg-[#4a6350] gap-2 mx-auto mt-6 border-2 border-black shadow-[0px_3px_10px_rgba(0,0,0,0.5)]">
+                    <span class="mr-2">Réservez votre rendez-vous</span>
+                    <svg class="w-6 h-6 rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7.707 4.293a1 1 0 010 1.414L5.414 8H17a1 1 0 010 2H5.414l2.293 2.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </a>
+        </div>
+    </section>
+
+{% endblock %}
+

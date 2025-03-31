@@ -1,0 +1,7 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+sitemap:
+    path: /sitemap.xml
+    controller: App\Controller\SitemapController::index

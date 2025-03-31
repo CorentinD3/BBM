@@ -1,0 +1,52 @@
+###> Symfony Framework ###
+/.env
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/
+/public/bundles/
+/var/
+/vendor/
+###< Symfony Framework ###
+
+###> Logs ###
+*.log
+/dev.log
+###< Logs ###
+
+###> IDE & Editor ###
+/.idea/
+/.vscode/
+/*.swp
+###< IDE & Editor ###
+
+###> Node.js & Webpack ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+package-lock.json
+###< Node.js & Webpack ###
+
+###> PHPUnit ###
+/phpunit.xml
+.phpunit.result.cache
+###< PHPUnit ###
+
+###> Symfony PHPUnit Bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< Symfony PHPUnit Bridge ###
+
+###> Tailwind CSS ###
+/.postcssrc.js
+/tailwind.config.js
+###< Tailwind CSS ###
+
+###> Cache & Generated Files ###
+/cache/
+/coverage/
+/dist/
+/out/
+/tmp/
+###< Cache & Generated Files ###

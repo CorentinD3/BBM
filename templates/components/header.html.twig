@@ -1,0 +1,306 @@
+
+<header>
+    <nav id="nav" class="fixed w-screen bg-[#fbeae6] h-fit z-50">
+        <div class="h-16 container px-4 mx-auto text-white flex items-center justify-between">
+            <!-- Lien du logo -->
+            <a href="{{ path('app_home') }}" class="absolute left-1/2 transform -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0">
+                <img class="h-16 py-1" src="{{ asset('img/BEAUTYBYM.png') }}" alt="Beauty By M">
+            </a>
+
+            <!-- Liens de navigation -->
+            <div id="navItems" class="relative lg:flex lg:gap-8 gap-6 uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg items-center ml-auto">
+                <a href="{{ path('app_home') }}" class="hover:scale-110 duration-100">
+                    <span class="h-full py-6">
+                        Accueil
+                    </span>
+                </a>
+
+                <!-- Section Prestations avec dropdown pour PC -->
+                <div class="relative uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg">
+                    <!-- Bouton Prestations -->
+                    <div id="prestationsButton" class="cursor-pointer text-center py-6 hover:scale-105 duration-100">
+                        Prestations
+                    </div>
+
+                    <!-- Liste déroulante -->
+                    <div id="prestationsMenu" class="absolute justify-center left-1/2 transform -translate-x-1/2 h-0 justify-between  overflow-hidden hidden flex flex-col bg-[#fbeae6] mt-[-6px] w-44 shadow-lg border-[1.5px] border-black ease-in-out duration-500 rounded-b-lg z-30">
+                        <a href="{{ path('app_cil-a-cil') }}" class="border-b-[1.5px] border-black ">
+                            <span class=" flex mx-auto flex-col items-center py-4 w-fit hover:scale-110 duration-100">
+                                CIL À CIL
+                            </span>
+                        </a>
+                        <a href="{{ path('app_volume-russe') }}" class="border-b-[1.5px] border-black ">
+                            <span class=" flex mx-auto flex-col items-center py-4 w-fit hover:scale-110 duration-100">
+                                VOLUME RUSSE
+                            </span>
+                        </a>
+                        <a href="{{ path('app_mixte') }}">
+                            <span class=" flex mx-auto flex-col items-center py-4 w-fit hover:scale-110 duration-100">
+                                MIXTE
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <a href="{{ path('app_cal') }}" class="hover:scale-105 duration-100">
+                    <span class="h-full py-6">
+                        Prendre un rendez-vous
+                    </span>
+                </a>
+            </div>
+
+            <!-- Menu burger visible uniquement sur mobile -->
+            <div id="hamburger" class="fa fa-bars mr-[1.5vw] text-xl text-orange-950"></div>
+
+            <div id="login" class="flex lg:pl-6 pl-0 items-center justify-center cursor-pointer">
+                <svg id="loginSvg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-[#431407]">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 20.118a7.5 7.5 0 0 1 15 0" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 20.5 L19.5 20.5" />
+                </svg>
+            </div>
+
+            <!-- Menu mobile -->
+            <div id="userNav" class="fixed hidden overflow-hidden ml-[50vw] flex flex-col items-center pt-8 px-4 uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg bg-[#fbeae6] h-full inset-0 top-16 w-[50%] right-0 transform translate-x-full ease-in-out duration-500 cursor-pointer border-l-[1.5px] border-black z-50">
+                {% if app.user %}
+                    <a href="{{ path('app_appointment') }}" class=" block py-8 w-full focus:outline-none">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                Mes rendez-vous
+                            </div>
+                        </div>
+                    </a>
+                    <div class="border-b-[1.5px] border-orange-950 w-full"></div>
+                    <a href="{{ path('app_profile') }}" class=" block py-8 w-full focus:outline-none">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                Mon compte
+                            </div>
+                        </div>
+                    </a>
+                   {% if is_granted('ROLE_ADMIN') %}
+                   <div class="border-b-[1.5px] border-orange-950 w-full"></div>
+                   <a href="{{ path('admin') }}" class=" block py-8 w-full focus:outline-none">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                Administrateur
+                            </div>
+                        </div>
+                    </a>
+                    {% endif %}
+                    <div class="border-b-[1.5px] border-orange-950 w-full"></div>
+                    <a href="{{ path('app_logout') }}" class=" block py-8 w-full focus:outline-none">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                Déconnexion
+                            </div>
+                        </div>
+                    </a>
+                    <div class="border-b-[1.5px] border-orange-950 w-full"></div>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class=" block py-8 w-full focus:outline-none">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                Connexion
+                            </div>
+                        </div>
+                    </a>
+                    <div class="border-b-[1.5px] border-orange-950 w-full"></div>
+                {% endif %}
+            </div>
+
+            <!-- Menu mobile -->
+            <div id="mobileNav" class="fixed flex flex-col items-center pt-8 px-4 uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg bg-[#fbeae6] h-full inset-0 top-16 w-[50%] transform -translate-x-full ease-in-out duration-500 cursor-pointer border-r-[1.5px] border-black z-50">
+                <a href="{{ path('app_home') }}" class="block py-8 w-full focus:outline-none">
+                    <div class="flex justify-center">
+                        <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                            Accueil
+                        </div>
+                    </div>
+                </a>
+                <div class="border-b-[1.5px] border-black w-full"></div>
+                <a class="prestationsMobileParent  block py-8 w-full focus:outline-none">
+                    <div class="flex justify-center">
+                        <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                            Prestations
+                        </div>
+                    </div>
+                </a>
+                <div class="w-full"></div>
+                <div class="prestationsMobile w-full h-0 overflow-hidden bg-red-50 transition-all duration-500 "
+                >
+
+                <a href="{{ path('app_cil-a-cil') }}" class="prestationsMobileParent block py-8 w-full focus:outline-none border-y-[1.5px] border-black">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                CIL À CIL
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{ path('app_volume-russe') }}"  class="prestationsMobileParent block py-8 w-full focus:outline-none border-b-[1.5px] border-black">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                VOLUME RUSSE
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{ path('app_mixte') }}"  class="prestationsMobileParent block py-8 w-full focus:outline-none">
+                        <div class="flex justify-center">
+                            <div class="text-center w-auto flex-col relative hover:scale-105 duration-100">
+                                MIXTE
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <a href="{{ path('app_cal') }}" class="block py-8 w-full focus:outline-none border-y-[1.5px] border-black">
+                    <div class="flex justify-center">
+                        <div class="text-center w-auto flex-col relative hover:scale-[102%] duration-100">
+                            Prendre un rendez-vous
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="relative border-b-[1.5px] border-black rounded-full w-full z-50"></div>
+    </nav>
+    <script>
+        const nav = document.getElementById("nav");
+        const navItems = document.getElementById("navItems");
+        const mobileNav = document.getElementById("mobileNav");
+        const userNav = document.getElementById("userNav");
+        const hamburger = document.getElementById("hamburger");
+        const user = document.getElementById("login");
+        const svg = document.getElementById("loginSvg");
+        const prestationsButton = document.getElementById("prestationsButton");
+        const prestationsMenu = document.getElementById("prestationsMenu");
+        const prestationsMobile = document.querySelector('.prestationsMobile');
+        const prestationsMobileParent = document.querySelector('.prestationsMobileParent');
+        let timeout;
+
+        let prestationsTimeout;
+
+        // Fonction pour ajuster la navbar en fonction de la largeur de l'écran
+        function adjustNavbar() {
+            const screenWidth = window.innerWidth;
+            if (screenWidth < 1024) { // Breakpoint pour lg
+                navItems.style.display = "none";
+                hamburger.style.display = "flex";
+            } else {
+                navItems.style.display = "flex";
+                hamburger.style.display = "none";
+                mobileNav.classList.add("-translate-x-full");
+                userNav.classList.add("translate-x-full");
+            }
+        }
+
+        // Initialisation de la navbar
+        adjustNavbar();
+        window.addEventListener("resize", adjustNavbar);
+
+        // Fonction pour afficher ou masquer un élément avec une transition
+        function toggleElement(element, height, transitionDuration = 300) {
+            if (element.style.height === '0px' || !element.style.height) {
+                element.style.height = `${height}px`;
+                setTimeout(() => {
+                    element.style.height = 'auto'; // Pour éviter les problèmes de hauteur
+                }, transitionDuration);
+            } else {
+                element.style.height = `${element.scrollHeight}px`; // Force un recalcul de la hauteur
+                setTimeout(() => {
+                    element.style.height = '0px';
+                }, 10);
+            }
+        }
+
+        // Gestion du menu mobile avec le hamburger
+        hamburger.addEventListener("click", () => {
+            if (!userNav.classList.contains("translate-x-full")) {
+                userNav.classList.add("translate-x-full");
+                userNav.classList.remove("translate-x-0");
+                svg.setAttribute("fill", "none");
+            }
+
+            mobileNav.classList.toggle("-translate-x-full");
+            mobileNav.classList.toggle("translate-x-0");
+            prestationsMobile.style.height = '0px'; // Replie le menu des prestations mobiles
+
+            // Change l'icône du hamburger
+            hamburger.classList.toggle("fa-bars");
+            hamburger.classList.toggle("fa-close");
+        });
+
+        // Gestion du menu utilisateur
+        user.addEventListener("click", () => {
+            if (!mobileNav.classList.contains("-translate-x-full")) {
+                mobileNav.classList.add("-translate-x-full");
+                mobileNav.classList.remove("translate-x-0");
+                hamburger.classList.add("fa-bars");
+                hamburger.classList.remove("fa-close");
+                prestationsMobile.style.height = '0px'; // Replie le menu des prestations mobiles
+            }
+
+            userNav.classList.remove("hidden");
+            setTimeout(() => {
+                userNav.classList.toggle("translate-x-0");
+                userNav.classList.toggle("translate-x-full");
+            }, 50);
+
+            // Basculer le remplissage de l'icône SVG
+            svg.setAttribute("fill", svg.getAttribute("fill") === "none" ? "currentColor" : "none");
+        });
+
+        // Fermer les menus lorsque l'utilisateur clique ailleurs
+        document.addEventListener("click", (event) => {
+            if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
+                prestationsMobile.style.height = '0px';
+                mobileNav.classList.add("-translate-x-full");
+                mobileNav.classList.remove("translate-x-0");
+                hamburger.classList.add("fa-bars");
+                hamburger.classList.remove("fa-close");
+            }
+
+            if (!nav.contains(event.target) && !user.contains(event.target)) {
+                userNav.classList.add("translate-x-full");
+                userNav.classList.remove("translate-x-0");
+                svg.setAttribute("fill", "none");
+            }
+        });
+
+        // Ajouter hidden après la fermeture de userNav
+        userNav.addEventListener("transitionend", () => {
+            if (userNav.classList.contains("translate-x-full")) {
+                userNav.classList.add("hidden");
+            }
+        });
+
+        function toggleMenu(open) {
+            clearTimeout(timeout);
+
+            if(open) {
+                prestationsMenu.classList.remove('hidden');
+                prestationsMenu.style.height = `${prestationsMenu.scrollHeight}px`;
+            } else {
+                prestationsMenu.style.height = '0';
+                timeout = setTimeout(() => prestationsMenu.classList.add('hidden'), 300);
+            }
+        }
+
+        // Desktop
+        prestationsButton.addEventListener('mouseenter', () => toggleMenu(true));
+        prestationsButton.addEventListener('mouseleave', () => timeout = setTimeout(() => toggleMenu(false), 200));
+
+        prestationsMenu.addEventListener('mouseenter', () => clearTimeout(timeout));
+        prestationsMenu.addEventListener('mouseleave', () => timeout = setTimeout(() => toggleMenu(false), 200));
+
+        // Gestion du menu déroulant des prestations (mobile)
+        prestationsMobileParent.addEventListener('click', () => {
+            toggleElement(prestationsMobile, prestationsMobile.scrollHeight);
+        });
+
+
+    </script>
+
+</header>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de votre rendez-vous</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f8f8f8; ">
+
+<div style="background-color: #FEF2F2; max-width: 600px; margin: auto; padding: 20px;
+            border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid black;">
+    <div style="text-align: center;">
+        <!-- Logo -->
+        <img style="width: 150px;" src="https://beauty-bym.fr/img/BEAUTYBYM.png" alt="Logo Beauty By M">
+
+        <!-- Séparateur -->
+        <div style="width: 100%; height: 1px; background-color: black; margin: 15px 0;"></div>
+
+        <!-- Message de confirmation -->
+        <h2 style="color: black;">Bonjour {{ reservation.user.firstName }},</h2>
+        <p style="font-size: 16px; color: #333;">Votre rendez-vous est bien confirmé !</p>
+    </div>
+    <div style="padding-left: 3%; padding-right: 3%">
+         <!-- Détails du rendez-vous -->
+        <h3 style="margin-bottom: 10px; color: black;">📌 Détails de votre rendez-vous :</h3>
+        <div style="text-align: left; display: inline-block; font-size: 14px; line-height: 1.6; color: #333;">
+            <ul style="padding: 0; list-style-type: none;">
+                <li><strong>Date :</strong> {{ reservation.date|format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY") }}</li>
+                <li><strong>Heure :</strong> {{ reservation.hour }}</li>
+                <li><strong>Durée :</strong> {{ reservation.duration }}</li>
+                <li><strong>Prestation :</strong> {{ reservation.prestation }}</li>
+                <li><strong>Lieu :</strong> {{ reservation.eventLocation }}</li>
+            </ul>
+        </div>
+    </div>
+    <div style="padding-left: 3%; padding-right: 3%">
+        <!-- Rappel du paiement -->
+        <p style="font-size: 16px; margin-top: 15px;"><strong>💳 Rappel :</strong>
+            Un montant de <strong>{{ reservation.price }} €</strong> sera à régler sur place lors de votre rendez-vous.</p>
+
+        <!-- Politique d'annulation -->
+        <div style="background-color: #FFD166; padding: 10px; border-radius: 6px; margin-top: 15px; text-align: center">
+            <p style="margin: 0; font-size: 14px; color: #333;"><strong>⚠️ Annulation possible jusqu'au :</strong>
+                {{ reservation.cancelLimit|format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY à HH:mm") }}.</p>
+            <p style="margin: 5px 0 0; font-size: 14px;">Passé ce délai, toute annulation ne sera plus possible.</p>
+        </div>
+        <!-- Message de clôture -->
+        <p style="margin-top: 20px; font-size: 16px; color: #333;">
+            Nous avons hâte de vous accueillir chez <strong>Beauty By M</strong> !</p>
+
+        <p style="margin-top: 10px; font-size: 14px;">Si vous avez des questions, n'hésitez pas à nous contacter sur notre Instagram.</p>
+
+        <p style="font-size: 14px; color: black;  margin-bottom: 24px;"><strong>À très bientôt, {{ reservation.user.firstname }} !</strong></p>
+        <p style="font-size: 14px; text-align: right; margin-bottom: 24px;">L'équipe <strong>Beauty By M</strong>.</p>
+    </div>
+    <!-- Séparateur -->
+    <div style="width: 100%; height: 1px; background-color: black; margin: 15px 0;"></div>
+
+    <div style="text-align: center">
+        <!-- Bouton Localiser -->
+        <a href="{{ url('app_redirect_maps', { location: 'bergues' }) }}"
+           style="max-width: 600px; display: block; padding: 12px 20px; background-color: #fef2f2; color: #000; margin-bottom: 12px;
+              border: 2px solid black; border-radius: 5px; text-decoration: none; font-weight: bold; cursor: pointer;">
+            Localiser
+        </a>
+
+        <!-- Bouton Calendrier -->
+        <a href="{{ url('app_calendar_redirect', {
+            start: reservation.eventDtstart,
+            end: reservation.eventDtend,
+            title: reservation.eventTitle,
+            description: reservation.eventDescription,
+            location: reservation.eventLocation
+        }) }}"
+           style="max-width: 600px; display: block; padding: 12px 20px; background-color: #fef2f2; color: #000; margin-bottom: 12px;
+              border: 2px solid black; border-radius: 5px; text-decoration: none; font-weight: bold; cursor: pointer;">
+            Ajouter au calendrier
+        </a>
+
+        <!-- Bouton Annuler -->
+        <a href="{{ url('app_cancel_appointment_check', { token: reservation.cancelToken }) }}"
+           style="max-width: 600px; display: block; padding: 12px 20px; background-color: #fef2f2; color: #000;
+              border: 2px solid black; border-radius: 5px; text-decoration: none; font-weight: bold; cursor: pointer;">
+            Annuler mon rendez-vous
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

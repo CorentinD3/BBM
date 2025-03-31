@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+<div class="relative lg:hidden h-[calc(70vh-64px)] w-full z-0">
+    <img src="{{ asset('img/out.jpg') }}" alt="Description de l'image"
+         class="h-[70vh] w-screen object-cover object-[50%]-[40%] lg:object-[10%_70%] fixed top-0 left-0 z-0">
+</div>
+<div class="relative hidden lg:block h-[calc(70vh-64px)] w-full z-0 bg-black">
+
+</div>
+
+<section class=" w-full bg-red-50 relative border-y-[1.5px] border-black z-20">
+
+    <div class="flex flex-col items-center min-h-[30vh] justify-center">
+        <svg class=" w-100 h-24">
+            <defs>
+                <path id="curve" d="M 20, 120 A 150, 100 0 0, 1 280, 120"/>
+            </defs>
+            <text width="500">
+                <textPath href="#curve" startOffset="50%" text-anchor="middle"
+                          class="text-orange-950 text-lg italic">
+                    CILS & SOURCILS
+                </textPath>
+            </text>
+        </svg>
+        <h1 class="text-4xl font-bold tracking-wide text-orange-950 mb-4">
+            Prestation
+        </h1>
+        <h2 class="text-lg tracking-wide text-orange-950 font-semibold mb-12">
+            BY M.
+        </h2>
+    </div>
+
+</section>
+    <div class="w-full relative bg-red-50 ">
+
+        <!-- Section avec le carrousel -->
+        <div class="flex bg-[#fbeae6] lg:flex-row flex-col-reverse justify-center items-center pl-[15vw] pr-[15vw] border-b-[1.5px] border-black py-12">
+            <div class="lg:h-[25vw] w-[40vw] h-[40vw] mx-auto lg:mt-0 mt-12" id="appSliderCilACil"></div>
+            <div class="flex flex-col lg:w-[45vw] lg:h-auto w-[80vw] h-auto justify-center items-center mt-12">
+                <h2 class="tracking-widest leading-none text-3xl text-orange-950 text-center bg-[#fbeae6] font-bold font-playfair italic z-30">CIL À CIL</h2>
+                <span class="text-9xl text-orange-950 tracking-widest font-playfair leading-none -mt-[100px] z-20">01</span>
+                <h3 class="text-center text-orange-950 text-lg mt-12 mb-12 lg:w-[70%] w-auto leading-relaxed">La pose cil à cil, également connue sous le nom de pose classique, consiste à appliquer une extension sur chaque cil naturel. Ce style offre un effet subtil et naturel, ajoutant de la longueur et une légère densité aux cils. Parfait pour celles qui recherchent un look élégant et discret, cette technique met en valeur la beauté naturelle des cils sans les alourdir.</h3>
+                <p class="text-orange-950 text-lg mb-6">
+                    Durée de la prestation : <span class="font-bold">40 minutes</span>.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section des tarifs -->
+        <div class="bg-red-50 py-12 border-b-[1.5px] border-black">
+            <div class="relative lg:w-[50vw] w-[80vw] mx-auto p-6 rounded-lg shadow-md border-[1.5px] border-orange-950">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#fbeae6] to-orange-950 opacity-20 z-0">
+                    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+                        <path fill="white" fill-opacity="0.3" d="M0,128L48,160C96,192,192,256,288,266.7C384,277,480,235,576,192C672,149,768,107,864,112C960,117,1056,171,1152,192C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    </svg>
+                </div>
+                <h2 class="relative flex lg:flex-row flex-col text-3xl font-serif text-orange-950 mb-6 pb-2 border-orange-950 w-fit mx-auto px-12 text-center lg:gap-4 gap-2">
+                    <p>Information</p>
+                    <p>Cil à cil</p>
+                </h2>
+
+                <div class="relative space-y-4 lg:px-6">
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left">Pose complète</p>
+                        <p class="text-center text-gray-600">40 min</p>
+                        <p class="font-bold text-right text-orange-950">45.00€</p>
+                    </div>
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left">&bull; Remplissage 2 semaines</p>
+                        <p class="text-center text-gray-600">40 min</p>
+                        <p class="font-bold text-right text-[#5d4037]">25.00€</p>
+                    </div>
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left">&bull; Remplissage 3 semaines</p>
+                        <p class="text-center text-gray-600">40 min</p>
+                        <p class="font-bold text-right text-orange-950">30.00€</p>
+                    </div>
+                    <div class="grid grid-cols-[2fr_1fr_1fr] border-b border-orange-950 pb-2">
+                        <p class="text-left">&bull; Remplissage 4 semaines</p>
+                        <p class="text-center text-gray-600">40 min</p>
+                        <p class="font-bold text-right text-orange-950">35.00€</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section Call to Action -->
+        <div class="flex bg-[#fbeae6] w-full flex-col justify-center items-center text-center py-12">
+            <h2 class="text-4xl font-bold tracking-wide text-orange-950 mb-6">
+                N'attendez plus !
+            </h2>
+            <h3 class="text-lg tracking-wide text-orange-950 mb-6 leading-relaxed">
+                Prenez rendez-vous dès maintenant et laissez-nous sublimer votre regard. Notre équipe est là pour vous offrir une expérience unique et inoubliable.
+            </h3>
+            <a href="{{ path('app_cal') }}">
+                <button type="button" class="relative w-full flex items-center justify-center shadow-2xl text-white font-medium py-2 rounded-md bg-[#5d7f64] transition px-6 hover:bg-[#4a6350] gap-2 mx-auto mt-6 border-2 border-black shadow-2xl">
+                    <span class="mr-2">Réservez votre rendez-vous</span>
+                    <svg class="w-6 h-6 rotate-180" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7.707 4.293a1 1 0 010 1.414L5.414 8H17a1 1 0 010 2H5.414l2.293 2.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+

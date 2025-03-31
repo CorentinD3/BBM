@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block meta_title %}
+Réservation
+{% endblock %}
+
+{% block meta_description %}
+    Réservez votre prochain rendez-vous dans votre institut Beauty By M. Cil à Cil | Volume Mixte | Volume Russe
+{% endblock %}
+
+{% block body %}
+    {% include 'components/cancelModal.html.twig' %}
+
+    <div class="relative lg:hidden h-[calc(70vh-64px)] w-full z-0">
+        <img src="{{ asset('img/in.jpg') }}" alt="Description de l'image"
+             class="h-[70vh] w-screen object-cover object-[50%]-[40%] lg:object-[10%_70%] fixed top-0 left-0 z-0">
+    </div>
+
+    <section class=" w-full bg-red-50 relative border-y-[1.5px] border-black z-20">
+
+        <div class="flex flex-col items-center min-h-[30vh] justify-center">
+            <svg class="w-100 h-12">
+                <defs>
+                    <!-- Chemin avec une hauteur ajustée -->
+                    <path id="curve" d="M 20, 60 A 150, 50 0 0, 1 280, 60" />
+                </defs>
+                <text width="500">
+                    <!-- Décalage vertical avec dy -->
+                    <textPath
+                            href="#curve"
+                            startOffset="50%"
+                            text-anchor="middle"
+                            fill="#431407"
+                            class="text-lg italic font-lato"
+                            dy="0.25em"
+                    >
+                        Extension de cils
+                    </textPath>
+                </text>
+            </svg>
+
+            <h1 class="text-4xl font-regitha tracking-wide text-orange-950 mb-6 mt-3">
+                Réservation
+            </h1>
+            <h2 class="text-lg font-lato tracking-wide text-orange-950 italic">
+                Beauty by M.
+            </h2>
+        </div>
+    </section>
+
+    <section class="relative bg-white z-20">
+
+    {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert shadow w-[80vw] lg:w-[40vw] items-center text-center lg:text-left min-w-[35vw] text-[#8a4b4b] font-medium py-2 rounded-md bg-[#f8d7da] transition border-2 hover:border-black mx-auto">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <!--   <div id="appCalAdmin" class="calendar-admin-container "></div>  -->
+
+        <div id="appCalClient" ></div>
+    </section>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

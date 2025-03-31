@@ -1,0 +1,55 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+services:
+
+    session.handler.pdo:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments:
+            $pdoOrDsn: 'mysql:host=eflrrljd3dev.mysql.db;port=3306;dbname=eflrrljd3dev;charset=utf8mb4'
+            $options:
+                db_username: 'eflrrljd3dev'
+                db_password: 'Geterete98'
+                db_table: 'sessions'
+                db_id_col: 'sess_id'
+                db_data_col: 'sess_data'
+                db_lifetime_col: 'sess_lifetime'
+                db_time_col: 'sess_time'
+    twig.extension.intl:
+        class: Twig\Extra\Intl\IntlExtension
+        tags: [ 'twig.extension' ]
+
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Les services ne sont pas accessibles directement sauf si explicitement rendu public.
+
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # Définition explicite du service AWSService
+    App\Service\AWSService:
+        arguments:
+            $awsKey: '%env(AWS_ACCESS_KEY_ID)%'
+            $awsSecret: '%env(AWS_SECRET_ACCESS_KEY)%'
+            $region: '%env(AWS_REGION)%'
+            $fromNumber: '%env(AWS_FROM_PHONE_NUMBER)%'
+
+    App\Service\ReminderService:
+        arguments:
+            $awsKey: '%env(AWS_ACCESS_KEY_ID)%'
+            $awsSecret: '%env(AWS_SECRET_ACCESS_KEY)%'
+            $region: '%env(AWS_REGION)%'
+            $fromNumber: '%env(AWS_FROM_PHONE_NUMBER)%'
+
+    App\EventListener\ProfileCompletionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }

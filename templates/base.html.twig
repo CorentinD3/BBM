@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tokenCalCli" content="{{ csrf_token('tokenCalCli') }}">
+    <script>
+        window.csrfToken = "{{ csrf_token('tokenCalCli') }}";
+    </script>
+    <meta charset="UTF-8">
+    {# Bloc Titre page #}
+    <title>{% block meta_title %}Beauty by M.{% endblock %}</title>
+
+    {# Bloc Méta description #}
+    <meta name="description" content="{% block meta_description %}Découvrez Beauty by M, votre institut d'extension de cils à Dunkerque, 81 rue Albert Cuenin. Réservation en ligne : Cil à Cil | Volume Mixte | Volume Russe{% endblock %}"/>
+    <link rel="icon" href="{{ asset('img/ico.png') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    {# CSS Stylesheets #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {# JavaScript Files #}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+    {% block google_maps %}{% endblock %}
+    {% block meta_custom %}
+        <meta name="keywords" content="Institut de cils Dunkerque, Extension de cils Dunkerque, Cil à cil Dunkerque, Volume russe Dunkerque, Extension de cils volume russe, Cils naturels Dunkerque, Cils épais et longs Dunkerque, Mixte volume russe cil à cil, Extensions de cils professionnelle Dunkerque, Cils soignés Dunkerque, Rehaussement de cils Dunkerque, Cils de rêve Dunkerque, Cils volumineux Dunkerque, Salon de beauté Dunkerque">
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BeautySalon",
+                "name": "Beauty by M.",
+                "description": "Découvrez Beauty by M, votre institut d'extension de cils à Dunkerque, 81 rue Albert Cuenin. Réservation en ligne : Cil à Cil | Volume Mixte | Volume Russe",
+                "url": "https://www.beauty-bym.fr/",
+                "telephone": "+33 7 67 17 14 19",
+                "address": [
+                    {
+                        "@type": "PostalAddress",
+                        "streetAddress": "81 Rue Albert Cuenin",
+                        "addressLocality": "Dunkerque",
+                        "postalCode": "59240",
+                        "addressCountry": "FR"
+                    }
+                ],
+                "geo": [
+                    {
+                        "@type": "GeoCoordinates",
+                        "latitude": 51.0430257,
+                        "longitude": 2.409702
+                    }
+                ],
+                "openingHoursSpecification": [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": "Monday",
+                        "opens": "11:00",
+                        "closes": "18:00"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": "Tuesday",
+                        "opens": "10:00",
+                        "closes": "19:00"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": "Wednesday",
+                        "opens": "10:00",
+                        "closes": "15:00"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": "Thursday",
+                        "opens": "10:00",
+                        "closes": "19:00"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": "Friday",
+                        "opens": "11:30",
+                        "closes": "16:00"
+                    }
+                ],
+                "sameAs": [
+                    "https://www.instagram.com/beauty.by_m__/"
+                ]
+            }
+        </script>
+    {% endblock %}
+
+
+</head>
+<body>
+{% include 'components/header.html.twig' %}
+{% include 'components/flash.html.twig' %}
+{% include 'components/modal.html.twig' %}
+
+<section class="h-16"></section>
+{# Main Content Block #}
+{% block body %}
+
+{% endblock %}
+
+<style>
+    body {
+        background-color: #fef2f2;
+    }
+    button {
+        touch-action: manipulation;
+    }
+</style>
+
+{% include 'components/footer.html.twig' %}
+</body>
+
+
+</html>
+
+

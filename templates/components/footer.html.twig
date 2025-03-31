@@ -1,0 +1,181 @@
+<section class="bg-[#fbeae6] relative bottom-0 w-full z-30 border-t-[1.5px] border-black">
+    <div class="container mx-auto px-4 py-12 mx-auto overflow-hidden border-b-[1.5px] border-black">
+
+        <nav class="flex sm:flex hidden flex-wrap justify-center lg:gap-4 gap-0 uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg items-center">
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_home') }}">
+                    <span class="h-full mb-4">
+                        Accueil
+                    </span>
+                </a>
+            </div>
+            <span>|</span>
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_cil-a-cil') }}">
+                    <span class="h-full mb-4">
+                        Cil à cil
+                    </span>
+                </a>
+            </div>
+            <span>|</span>
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_volume-russe') }}">
+                    <span class="h-full mb-4">
+                        Volume Russe
+                    </span>
+                </a>
+            </div>
+            <span>|</span>
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_mixte') }}">
+                    <span class="h-full mb-4">
+                        Mixte
+                    </span>
+                </a>
+            </div>
+            <span>|</span>
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_cal') }}">
+                    <span class="h-full mb-4">
+                        Prendre un rendez-vous
+                    </span>
+                </a>
+            </div>
+        </nav>
+        <nav class="flex sm:hidden inline flex-wrap justify-center lg:gap-4 gap-0 uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg items-center">
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_home') }}">
+                    <span class="h-full mb-4">
+                        Accueil
+                    </span>
+                </a>
+            </div>
+            <span>|</span>
+            <div class="px-2 py-2 hover:scale-[102%] duration-100">
+                <a href="{{ path('app_cal') }}">
+                    <span class="h-full mb-4">
+                        Prendre un rendez-vous
+                    </span>
+                </a>
+            </div>
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_cil-a-cil') }}">
+                    <span class="h-full mb-4">
+                        Cil à cil
+                    </span>
+                </a>
+            </div>
+            <span>|</span>
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_volume-russe') }}">
+                    <span class="h-full mb-4">
+                        Volume Russe
+                    </span>
+                </a>
+            </div>
+            <span>|</span>
+            <div class="px-2 py-2 hover:scale-105 duration-100">
+                <a href="{{ path('app_mixte') }}">
+                    <span class="h-full mb-4">
+                        Mixte
+                    </span>
+                </a>
+            </div>
+
+        </nav>
+        <nav class="flex sm:flex hidden flex-wrap justify-center lg:gap-4 gap-0 uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg items-center ">
+            {% if app.user %}
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_appointment') }}">
+                    <span class="h-full mb-4">
+                        Mes rendez-vous
+                    </span>
+                    </a>
+                </div>
+                <span>|</span>
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_profile') }}">
+                    <span class="h-full mb-4">
+                        Mon compte
+                    </span>
+                    </a>
+                </div>
+                <span>|</span>
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_logout') }}">
+                    <span class="h-full mb-4">
+                        Déconnexion
+                    </span>
+                    </a>
+                </div>
+
+            {% else %}
+
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_login') }}">
+                    <span class="h-full mb-4">
+                        Connexion
+                    </span>
+                    </a>
+                </div>
+            {% endif %}
+        </nav>
+        <nav class="flex sm:hidden inline flex-wrap justify-center lg:gap-4 gap-0 uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-lg items-center ">
+            {% if app.user %}
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_appointment') }}">
+                    <span class="h-full mb-4">
+                        Mes rendez-vous
+                    </span>
+                    </a>
+                </div>
+                <span>|</span>
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_profile') }}">
+                    <span class="h-full mb-4">
+                        Mon compte
+                    </span>
+                    </a>
+                </div>
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_logout') }}">
+                    <span class="h-full mb-4">
+                        Déconnexion
+                    </span>
+                    </a>
+                </div>
+
+            {% else %}
+
+                <div class="px-2 py-2 hover:scale-105 duration-100">
+                    <a href="{{ path('app_login') }}">
+                    <span class="h-full mb-4 ">
+                        Connexion
+                    </span>
+                    </a>
+                </div>
+            {% endif %}
+        </nav>
+
+
+
+
+    </div>
+    <div class="container uppercase font-lato tracking-wide text-orange-950 leading-relaxed text-base mx-auto px-4 py-12 mx-auto overflow-hidden">
+
+        <p class="text-center">
+            <a href="{{ path('app_mentions') }}">
+                - Mentions légales -
+            </a>
+        </p>
+        <p class="text-center pt-6">
+            <a href="{{ path('app_cgu') }}">
+                - Conditions générales d'utilisation -
+            </a>
+        </p>
+        <p class="pt-6 text-center">
+            © {{ "now"|date("Y") }} BEAUTY BY M. Tous droits réservés.
+        </p>
+    </div>
+
+</section>

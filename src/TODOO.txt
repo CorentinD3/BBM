@@ -1,0 +1,23 @@
+# TODO List
+
+## À faire
+- [x] VueRouter pour relier notre Vue aux routesAPI
+
+- [x] Relier boutons suppression et enregistrement de RDV | Controller + Vue
+- [x] Logique métier pour confirmer la validation des suppressions et enregistrements
+
+- [ ] Emails suppression et prise de RDV
+- [ ] Cron pour supprimer les anciens RDV + Storage
+- [ ] SMS Rappel
+
+- [x] Profil Utilisateur
+- [x] Menu connexion/deconnexion
+
+## Améliorations
+- [ ] Transformer nos Methods en Watch dans les Calendars
+- [ ] Renommer les routes
+- [X] FAIL SECU Lors d'une premiere connexion. Pas de check sur le nombre d'envoi de sms (jcrois)
+- [] FAIL SECU Lors d'un retour en arriere lors de la connexion. Retaper un autre numero n'est pas pris en compte et reste focus sur le premier. Ne cause pas de fail sécuritaire pour autant
+
+
+## Bugs connus
