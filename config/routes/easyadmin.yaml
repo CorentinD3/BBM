@@ -1,5 +1,0 @@
-# config/routes/easyadmin.yaml
-easyadmin:
-  resource: .
-  type: easyadmin.routes
-
